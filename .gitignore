@@ -15,16 +15,6 @@
 /node_modules
 /yarn-error.log
 
-/public/assets
-.byebug_history
-
-# Ignore master key for decrypting credentials and more.
-/config/master.key
 .idea
 .DS_Store
 */.DS_Store
-public/uploads/
-
-config/database.yml
-config/secrets.yml
-config/master.key
