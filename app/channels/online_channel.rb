@@ -1,19 +1,12 @@
 class OnlineChannel < ApplicationCable::Channel
   def subscribed
+    current_user.update_attribute(:online, true)
     stream_from "online_channel"
-    if current_user
-      ActionCable.server.broadcast "online_channel", { user: current_user.nickname, online: :on }
-      current_user.online = true
-      current_user.save!
-    end
+    ActionCable.server.broadcast "online_channel", users: User.online.as_json
   end
 
   def unsubscribed
-    if current_user
-      # Any cleanup needed when channel is unsubscribed
-      ActionCable.server.broadcast "online_channel", { user: current_user.nickname, online: :off }
-      current_user.online = false
-      current_user.save!
-    end
+    current_user.update_attribute(:online, false)
+    ActionCable.server.broadcast "online_channel", users: User.online.as_json
   end
 end
