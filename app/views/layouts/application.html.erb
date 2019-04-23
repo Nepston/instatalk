@@ -20,10 +20,13 @@
 
       <%= yield %>
 
+      <div class="js-online-users text-success mt-4 mb-4">
+        Online:
+        <%= User.online.as_json.map{ |user| user[:nickname] }.join(', ') %>
+      </div>
+
 
     </div>
-
-
   </div>
 </div>
 </body>
